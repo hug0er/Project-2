@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Chat room </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+
+       
+
+<body>
+    <div class="header">
+        <h1>Welcome to the best chat system</h1>
+        <p> Create a new User account :).</p>
+    </div>
+
+    <div class="content">
+        <p>Register with a unique and different username (average millennial user). </p>
+        <form action="" method="post">
+            <input id="nickname" type="text" placeholder="Enter your username" name="nickname">
+            <button class="btn btn-primary" id="sub">Register!</button>
+        </form>
+
+        {% if  codigo == 69 %}
+        <p class="error_msg"> The User already exists</p>
+        {% endif %}
+    </div>
+
+
+</body>

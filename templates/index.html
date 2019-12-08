@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Chat </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript">
+        if (localStorage.getItem('channel') != 'home' && localStorage.getItem('channel') != null) {
+            window.location.href = "/channel/" + localStorage.getItem('channel');
+        }
+        if (!localStorage.getItem('register')) {
+            window.location.href = "/register";
+        }
+        else {
+            window.onload = function () {
+                const nickname_var = localStorage.getItem('register');
+                document.querySelector('#nickname').innerHTML = nickname_var
+            }
+        }
+
+        function borrar() {
+            let user = localStorage.getItem('register')
+            localStorage.clear()
+            const form = document.createElement('form');
+            form.method = 'post';
+            form.action = "/delete";
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'user';
+            hiddenField.value = user;
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+
+</head>
+
+
+
+<body>
+    <div class="header">
+        <h1>Welcomeeeee <span id="nickname"></span></h1>
+        <p> Welcomeeeee, to the best chat system .</p>
+
+    </div>
+
+    <div class="content">
+        <p> Create a new channel to chat, or choose one.</p>
+
+        <form action="" method="post">
+            <input type="text" placeholder="Channel name" name="channel_name">
+            <button class="btn btn-primary"> Create new Channel</button>
+        </form>
+
+        <div>
+            <button onclick="borrar()" class="btn btn-danger">Log out and clear all the messages</button>
+        </div>
+
+        {% if  codigo == 420 %}
+        <p class="error_msg"> The Channel already exists</p>
+        {% endif %}
+        <h2>Channels</h2>
+        <ul class="list-group">
+            {%for channel in channels%}
+            <li class="list-group-item"><a href="channel/{{channel}}">{{channel}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
